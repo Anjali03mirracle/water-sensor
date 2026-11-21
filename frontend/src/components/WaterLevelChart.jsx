@@ -47,47 +47,47 @@ export default function WaterLevelChart({ history = [], statistics, tankHeight =
   const hoveredData = hoverIndex !== null && displayData[hoverIndex] ? displayData[hoverIndex] : null;
 
   return (
-    <div className="glass-card p-5 mb-6">
+    <div className="industrial-card p-4 sm:p-5 mb-5">
       <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-        <div className="flex items-center gap-2">
-          <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400">
-            <LineChart className="w-5 h-5" />
+        <div className="flex items-center gap-2.5">
+          <div className="p-1.5 rounded bg-sky-500/10 text-sky-400 border border-sky-500/20">
+            <LineChart className="w-4 h-4" />
           </div>
           <div>
-            <h2 className="text-base font-bold text-white flex items-center gap-2">
-              Live Radar Water Level Telemetry
-              <span className="text-xs font-normal text-slate-400 font-mono">
-                (Tank Height: {tankHeight}m)
+            <h2 className="text-sm font-semibold text-slate-100 flex items-center gap-2">
+              Radar Water Level Profile
+              <span className="text-[11px] font-normal text-slate-400 font-mono">
+                (Tank Height: {tankHeight.toFixed(1)}m)
               </span>
             </h2>
-            <p className="text-xs text-slate-400">
-              Real-time pulsed coherent radar distance inversion curve
+            <p className="text-[11px] text-slate-400">
+              Pulsed Coherent Radar surface inversion telemetry curve
             </p>
           </div>
         </div>
 
         {/* Threshold indicators & Point range selector */}
         <div className="flex items-center gap-3">
-          <div className="hidden sm:flex items-center gap-3 text-xs text-slate-400">
+          <div className="hidden sm:flex items-center gap-3 text-[11px] font-mono text-slate-400">
             <div className="flex items-center gap-1.5">
-              <span className="w-3 h-0.5 bg-rose-500 border-dashed border-b inline-block" />
-              <span>High (85% / {highThresholdMeters}m)</span>
+              <span className="w-3 h-0.5 bg-rose-500 inline-block" />
+              <span>High ({highThresholdMeters.toFixed(2)}m)</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="w-3 h-0.5 bg-amber-500 border-dashed border-b inline-block" />
-              <span>Low (20% / {lowThresholdMeters}m)</span>
+              <span className="w-3 h-0.5 bg-amber-500 inline-block" />
+              <span>Low ({lowThresholdMeters.toFixed(2)}m)</span>
             </div>
           </div>
 
-          <div className="flex items-center bg-slate-900/80 rounded-lg p-1 border border-slate-800 text-xs font-medium">
+          <div className="flex items-center bg-slate-900 rounded border border-slate-800 p-0.5 text-xs font-mono">
             {[15, 25, 50].map((count) => (
               <button
                 key={count}
                 onClick={() => setPointCount(count)}
-                className={`px-2.5 py-1 rounded transition ${
+                className={`px-2 py-0.5 rounded text-[11px] transition ${
                   pointCount === count
-                    ? 'bg-cyan-500 text-slate-950 font-bold'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-sky-600 text-white font-semibold'
+                    : 'text-slate-400 hover:text-slate-200'
                 }`}
               >
                 {count} pts
@@ -98,10 +98,10 @@ export default function WaterLevelChart({ history = [], statistics, tankHeight =
       </div>
 
       {/* SVG Chart */}
-      <div className="relative w-full overflow-hidden bg-slate-950/60 rounded-xl border border-slate-800/80 p-2">
+      <div className="relative w-full overflow-hidden bg-[#070b14] rounded border border-slate-800/90 p-2">
         {displayData.length === 0 ? (
-          <div className="h-[240px] flex items-center justify-center text-slate-500 text-sm">
-            <Activity className="w-5 h-5 animate-spin mr-2 text-cyan-400" />
+          <div className="h-[240px] flex items-center justify-center text-slate-500 text-xs font-mono">
+            <Activity className="w-4 h-4 animate-spin mr-2 text-sky-400" />
             Awaiting radar telemetry packets...
           </div>
         ) : (
@@ -112,9 +112,8 @@ export default function WaterLevelChart({ history = [], statistics, tankHeight =
           >
             <defs>
               <linearGradient id="waterGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.45" />
-                <stop offset="85%" stopColor="#0284c7" stopOpacity="0.1" />
-                <stop offset="100%" stopColor="#0284c7" stopOpacity="0.0" />
+                <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.18" />
+                <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0.0" />
               </linearGradient>
             </defs>
 
@@ -128,13 +127,13 @@ export default function WaterLevelChart({ history = [], statistics, tankHeight =
                     y1={y}
                     x2={width - padding.right}
                     y2={y}
-                    stroke="#334155"
+                    stroke="#1e293b"
                     strokeWidth="0.8"
-                    strokeDasharray="4 4"
+                    strokeDasharray="3 3"
                   />
                   <text
                     x={padding.left - 8}
-                    y={y + 4}
+                    y={y + 3.5}
                     fill="#64748b"
                     fontSize="10"
                     textAnchor="end"
@@ -153,8 +152,8 @@ export default function WaterLevelChart({ history = [], statistics, tankHeight =
               x2={width - padding.right}
               y2={getY(highThresholdMeters)}
               stroke="#f43f5e"
-              strokeWidth="1.2"
-              strokeDasharray="6 4"
+              strokeWidth="1.0"
+              strokeDasharray="5 3"
             />
 
             {/* Low Threshold Reference Line */}
@@ -164,8 +163,8 @@ export default function WaterLevelChart({ history = [], statistics, tankHeight =
               x2={width - padding.right}
               y2={getY(lowThresholdMeters)}
               stroke="#f59e0b"
-              strokeWidth="1.2"
-              strokeDasharray="6 4"
+              strokeWidth="1.0"
+              strokeDasharray="5 3"
             />
 
             {/* Gradient Area */}
@@ -176,8 +175,8 @@ export default function WaterLevelChart({ history = [], statistics, tankHeight =
               <path
                 d={pathD}
                 fill="none"
-                stroke="#06b6d4"
-                strokeWidth="2.5"
+                stroke="#0ea5e9"
+                strokeWidth="1.8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
@@ -194,14 +193,14 @@ export default function WaterLevelChart({ history = [], statistics, tankHeight =
                   <circle
                     cx={cx}
                     cy={cy}
-                    r={isHovered ? 6 : 3}
+                    r={isHovered ? 5 : 2.5}
                     fill={d.status === 'HIGH' ? '#f43f5e' : d.status === 'LOW' ? '#f59e0b' : '#38bdf8'}
-                    stroke="#0f172a"
-                    strokeWidth="2"
-                    className="transition-all duration-150 cursor-pointer"
+                    stroke="#0b111e"
+                    strokeWidth="1.5"
+                    className="transition-all duration-100 cursor-pointer"
                     onMouseEnter={() => setHoverIndex(i)}
                   />
-                  {/* Invisible larger hit target for smooth hover on mobile/desktop */}
+                  {/* Hit target for smooth hover */}
                   <rect
                     x={cx - 10}
                     y={padding.top}
@@ -233,9 +232,9 @@ export default function WaterLevelChart({ history = [], statistics, tankHeight =
         {/* Hover Tooltip Overlay */}
         {hoveredData && (
           <div
-            className="absolute top-4 right-4 bg-slate-900/95 border border-cyan-500/50 p-2.5 rounded-lg shadow-xl text-xs space-y-1 font-mono backdrop-blur pointer-events-none"
+            className="absolute top-3 right-3 bg-[#0d1527] border border-slate-700/80 p-2.5 rounded shadow-lg text-[11px] space-y-1 font-mono pointer-events-none"
           >
-            <div className="text-cyan-300 font-bold flex items-center justify-between gap-4">
+            <div className="text-sky-300 font-semibold flex items-center justify-between gap-4">
               <span>Water Level:</span>
               <span>{hoveredData.waterLevelMeters.toFixed(3)} m ({hoveredData.waterLevelPercentage}%)</span>
             </div>
@@ -245,7 +244,7 @@ export default function WaterLevelChart({ history = [], statistics, tankHeight =
             </div>
             <div className="text-slate-400 flex items-center justify-between gap-4">
               <span>Status:</span>
-              <span className={hoveredData.status === 'HIGH' ? 'text-rose-400 font-bold' : hoveredData.status === 'LOW' ? 'text-amber-400' : 'text-emerald-400'}>
+              <span className={hoveredData.status === 'HIGH' ? 'text-rose-400 font-semibold' : hoveredData.status === 'LOW' ? 'text-amber-400 font-semibold' : 'text-emerald-400 font-semibold'}>
                 {hoveredData.status}
               </span>
             </div>
@@ -258,22 +257,22 @@ export default function WaterLevelChart({ history = [], statistics, tankHeight =
 
       {/* Statistical Summary Strip */}
       {statistics && (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-3 pt-3 border-t border-slate-800/80 text-xs">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-3 pt-3 border-t border-slate-800/80 text-[11px] font-mono">
           <div className="text-slate-400">
-            <span>Average Level: </span>
-            <strong className="text-slate-200 font-mono">{statistics.averageLevelMeters || 0} m</strong>
+            <span className="font-sans text-slate-500">Average: </span>
+            <strong className="text-slate-200">{statistics.averageLevelMeters || 0} m</strong>
           </div>
           <div className="text-slate-400">
-            <span>Max Peak Level: </span>
-            <strong className="text-slate-200 font-mono">{statistics.maxLevelMeters || 0} m</strong>
+            <span className="font-sans text-slate-500">Peak: </span>
+            <strong className="text-slate-200">{statistics.maxLevelMeters || 0} m</strong>
           </div>
           <div className="text-slate-400">
-            <span>Min Low Level: </span>
-            <strong className="text-slate-200 font-mono">{statistics.minLevelMeters || 0} m</strong>
+            <span className="font-sans text-slate-500">Minimum: </span>
+            <strong className="text-slate-200">{statistics.minLevelMeters || 0} m</strong>
           </div>
           <div className="text-slate-400 text-right">
-            <span>Historical Records: </span>
-            <strong className="text-cyan-400 font-mono">{statistics.count || 0}</strong>
+            <span className="font-sans text-slate-500">Records: </span>
+            <strong className="text-sky-400">{statistics.count || 0}</strong>
           </div>
         </div>
       )}

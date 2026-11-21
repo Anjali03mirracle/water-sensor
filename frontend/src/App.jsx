@@ -248,21 +248,21 @@ export default function App() {
       />
 
       {/* Navigation Tabs for clean organized views */}
-      <div className="flex items-center gap-2 mb-6 border-b border-slate-800 pb-3 overflow-x-auto">
+      <div className="flex items-center gap-1.5 mb-5 border-b border-slate-800 pb-2.5 overflow-x-auto">
         {[
-          { id: 'overview', label: 'Dashboard Overview' },
-          { id: 'ble', label: 'BLE & Payload Decoder' },
-          { id: 'mqtt', label: 'MQTT Telemetry Broker' },
-          { id: 'storage', label: 'Elasticsearch Index' },
-          { id: 'history', label: 'Historical Log Table' }
+          { id: 'overview', label: 'SYSTEM OVERVIEW' },
+          { id: 'ble', label: 'BLE & BYTE DECODER' },
+          { id: 'mqtt', label: 'MQTT INGESTION' },
+          { id: 'storage', label: 'ELASTICSEARCH INDEX' },
+          { id: 'history', label: 'TELEMETRY ARCHIVE' }
         ].map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition ${
+            className={`px-3 py-1.5 rounded text-xs font-mono font-medium whitespace-nowrap transition ${
               activeTab === tab.id
-                ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20'
-                : 'bg-slate-900/60 text-slate-400 hover:text-white hover:bg-slate-800'
+                ? 'bg-[#141e33] text-sky-400 border border-sky-500/40 font-semibold shadow-sm'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900 border border-transparent'
             }`}
           >
             {tab.label}

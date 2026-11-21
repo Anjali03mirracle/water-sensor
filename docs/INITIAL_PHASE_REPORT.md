@@ -9,7 +9,7 @@
 
 ## 1. Six Training Activities & Allocated Hours from Handbook
 
-As specified in the company training curriculum, the project tasks are distributed across six core engineering activities with an allocated total of **9.0 hours**:
+As specified in the company training curriculum, the project tasks are distributed across six core engineering activities:
 
 | Activity # | Activity Description | Allocated Time (Handbook) | Actual Time Spent | Completion Status |
 |:---:|:---|:---:|:---:|:---:|
@@ -101,7 +101,7 @@ Frontend production build (`npm run build`):
 
 ## 5. Remaining Work & Next Steps
 
-1. Review project lead responses regarding verified vendor protocols and physical hardware pinouts.
+1. Obtain verified vendor protocols, BLE UUIDs, and physical hardware pinouts.
 2. Flash Acconeer RSS C-SDK to target microcontroller (STM32WB55 or Nordic nRF52840).
 3. Replace application-level 12-byte demo protocol with official MCU payload format once specified.
 4. Integrate native Web Bluetooth or Noble daemon for hardware BLE pairing.

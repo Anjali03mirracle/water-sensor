@@ -343,7 +343,6 @@ npm test
 
 Detailed project phase tracking and governance documents are available in the `/docs` directory:
 - [Initial Phase Report](docs/INITIAL_PHASE_REPORT.md): Training activities breakdown, time spent, test evidence, and blockers.
-- [Team Lead Questions](docs/TEAM_LEAD_QUESTIONS.md): Technical questionnaire on exact BLE UUIDs, payload protocol, Acconeer hardware pinouts, and infrastructure.
 
 ---
 
