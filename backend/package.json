@@ -1,0 +1,19 @@
+{
+  "name": "iot-water-level-backend",
+  "version": "1.0.0",
+  "description": "IoT Water Level Detection Backend with BLE Decoder, Acconeer A121 Adapter, MQTT, and Elasticsearch",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test tests/bleDecoder.test.js tests/acconeerA121.test.js tests/api.test.js"
+  },
+  "dependencies": {
+    "@elastic/elasticsearch": "^8.15.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mqtt": "^5.10.1"
+  }
+}
